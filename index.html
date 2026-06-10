@@ -77,7 +77,7 @@
     line-height:1.75; color:#a89f92; font-weight:500; }
 
   /* ============ WALKTHROUGH PANELS ============ */
-  .panel { position:relative; height:115vh; }
+  .panel { position:relative; height:170vh; }
   .panel .frame { position:sticky; top:0; height:100dvh; overflow:hidden; }
   .panel .pimg { position:absolute; inset:-14% 0; will-change:transform; }
   .panel .scrim { position:absolute; inset:0;
@@ -407,7 +407,9 @@
       var r = el.parentElement.parentElement.getBoundingClientRect();
       if(r.bottom < 0 || r.top > vh) return;
       var p = (vh - r.top) / (vh + r.height);   // 0..1 through the panel
-      el.style.transform = 'translateY(' + ((p - .5) * 12) + '%)';
+      // push-in: the camera travels INTO the room as you scroll through it
+      var s = 1 + p * (innerWidth > 760 ? 0.32 : 0.2);
+      el.style.transform = 'translateY(' + ((p - .5) * 8) + '%) scale(' + s + ')';
     });
     if(kin && kt){
       var r = kin.getBoundingClientRect();
